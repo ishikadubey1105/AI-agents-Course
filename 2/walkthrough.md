@@ -11,7 +11,7 @@ This document summarizes the steps taken to resolve the issues in Task 2, secure
 2. **Hardcoded Credentials**:
    - Extracted the Groq API key from [task2.py](file:///c:/Users/ishik/.antigravity-ide/AI-agents-Course/2/task2.py).
    - Moved the key to the local environment configuration in [2/.env](file:///c:/Users/ishik/.antigravity-ide/AI-agents-Course/2/.env).
-   - Updated the code in `task2.py` to load the API key dynamically using `dotenv`.
+   - Updated the code in `task2.py` to resolve and load the `.env` file relative to the script location (using `pathlib.Path(__file__)`), which ensures it works correctly even when run from the workspace root.
 
 ---
 
