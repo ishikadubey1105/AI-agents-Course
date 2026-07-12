@@ -20,7 +20,7 @@ This document summarizes the steps taken to set up the Python environment, insta
    - Captured the dependencies in `requirements.txt`.
 
 3. **Script Implementation (`task1.py`)**:
-   - Initialized `dotenv` to load the API key from `.env`.
+   - Initialized `dotenv` to load the API key from `.env` relative to the script location (using `pathlib.Path(__file__)`).
    - Included safe fallback printing for console environments (if `IPython` is not present).
    - Created a `Fact Checker` agent using the `Agent` and `Runner` classes.
    - Replaced the invalid model `"gpt-4.1"` with `"gpt-4o-mini"`.
