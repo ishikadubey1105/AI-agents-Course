@@ -2,6 +2,14 @@
 
 This document summarizes the steps taken to resolve the issues in Task 2, secure the credentials, and test the Travel Agent AI.
 
+## Project Structure under Folder 2
+- `task2.py` - Main travel agent AI loop.
+- `.env` - Environment configuration containing the Groq API key placeholder.
+- `requirements.txt` - Python package dependencies for Groq.
+- `walkthrough.md` - This documentation.
+
+---
+
 ## Issues Resolved
 
 1. **Missing Dependency (`groq`)**:
