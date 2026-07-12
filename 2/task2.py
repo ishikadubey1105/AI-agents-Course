@@ -1,9 +1,11 @@
 import os
+from pathlib import Path
 from dotenv import load_dotenv
 from groq import Groq
 
-# Load environment variables from the local .env file
-load_dotenv()
+# Load environment variables from the local .env file relative to the script path
+env_path = Path(__file__).resolve().parent / ".env"
+load_dotenv(dotenv_path=env_path)
 
 # Get the Groq API Key
 groq_api_key = os.getenv("GROQ_API_KEY")

@@ -1,10 +1,12 @@
 import os
 import asyncio
+from pathlib import Path
 from openai import OpenAI
 from dotenv import load_dotenv
 
-# Load the API key from the .env file
-load_dotenv()
+# Load the API key from the local .env file in this script's directory
+env_path = Path(__file__).resolve().parent / ".env"
+load_dotenv(dotenv_path=env_path)
 
 # Get the OpenAI API keys from environment variables
 openai_api_key = os.getenv("OPENAI_API_KEY")
