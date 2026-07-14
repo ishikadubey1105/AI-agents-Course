@@ -1,0 +1,6 @@
+openai-agents
+python-dotenv
+langchain-openai==0.2.1
+pydantic
+tavily-python
+
