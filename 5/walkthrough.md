@@ -2,12 +2,13 @@
 
 This document covers Task 5, which demonstrates persistent memory across conversations using the OpenAI Agents SDK with a SQLite backend — running on Groq's free LLaMA model.
 
-## Project Structure under Folder `1/3/4/5`
+## Project Structure
 
 ```
-1/3/4/5/
+5/
 ├── task5.py          # Main agent script — persistent memory demo
 ├── agent_memory.db   # SQLite database (auto-created, not committed)
+├── .env              # API keys — not committed (create locally)
 └── walkthrough.md    # This documentation
 ```
 
@@ -43,19 +44,16 @@ Demonstrates **persistent cross-turn memory** using `SQLiteSession` from the Ope
    pip install openai-agents python-dotenv
    ```
 
-2. **Set API Key** — Uses `GROQ_API_KEY` from the parent `.env`. Groq is configured as an OpenAI-compatible endpoint:
-   ```python
-   os.environ["OPENAI_BASE_URL"] = "https://api.groq.com/openai/v1"
-   ```
-   The Agents SDK will use `OPENAI_API_KEY` env var — set it equal to your Groq key, or set it in `.env`:
+2. **Set API Keys** — Create `5/.env`:
    ```env
    GROQ_API_KEY=your-groq-api-key-here
    OPENAI_API_KEY=your-groq-api-key-here
    ```
+   > The Agents SDK reads `OPENAI_API_KEY`. Groq is configured as an OpenAI-compatible endpoint via `OPENAI_BASE_URL`.
 
 3. **Run the script**:
    ```powershell
-   & .venv313\Scripts\python 1/3/4/5/task5.py
+   & .venv313\Scripts\python 5/task5.py
    ```
 
 ---
@@ -63,7 +61,7 @@ Demonstrates **persistent cross-turn memory** using `SQLiteSession` from the Ope
 ## Running the Task
 
 ```powershell
-& .venv313\Scripts\python 1/3/4/5/task5.py
+& .venv313\Scripts\python 5/task5.py
 ```
 
 **Expected output**:
@@ -76,5 +74,3 @@ Agent: Nice to meet you, Parag! ...
 User: Can you remind me what my name is and what my age is?
 Agent: Your name is Parag Naik, and you are 36 years old.
 ```
-
-The SQLite database at `agent_memory.db` persists this history — re-running the script will add to the existing session.

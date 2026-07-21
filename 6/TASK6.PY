@@ -32,8 +32,9 @@ def _groq_safe_completion(*args, **kwargs):
     return _orig_completion(*args, **kwargs)
 litellm.completion = _groq_safe_completion
 
-# Load API key from .env file
-load_dotenv(dotenv_path=r"c:\Users\ishik\.antigravity-ide\AI-agents-Course\1\3\4\.env")
+# Load API key from .env file in this folder (6/.env)
+from pathlib import Path
+load_dotenv(dotenv_path=Path(__file__).resolve().parent / ".env")
 
 # Groq has an OpenAI-compatible API — use crewai's native openai provider
 # pointed at Groq's endpoint. No litellm needed!

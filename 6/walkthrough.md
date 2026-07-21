@@ -2,17 +2,18 @@
 
 This document covers Task 6, which builds a full multi-agent crew using CrewAI with two specialized agents, task delegation, AI planning, and blog post generation — all running on Groq's free LLaMA model.
 
-## Project Structure under Folder `1/3/4/5/6`
+## Project Structure
 
 ```
-1/3/4/5/6/
+6/
 ├── TASK6.PY           # Main crew script — multi-agent blog writer
+├── .env               # API keys — not committed (create locally)
 ├── blog-posts/
 │   └── new_post.md    # Auto-generated blog post output
 └── walkthrough.md     # This documentation
 ```
 
-> **Note:** API keys are loaded from the parent `.env` at `1/3/4/.env`. Never commit `.env` files.
+> **Note:** API keys are loaded from `6/.env`. Never commit `.env` files.
 
 ---
 
@@ -37,7 +38,7 @@ With **AI Planning enabled** (`planning=True`), CrewAI generates an execution pl
 | `Task` | A unit of work assigned to an agent with a description and expected output |
 | `Crew` | Orchestrator that runs agents and tasks in sequence |
 | `planning=True` | Enables a pre-run AI planning step that improves task coordination |
-| `output_file` | The writer task saves its output directly to `blog-posts/new_post.md` |
+| `output_file` | The writer task saves its output to `blog-posts/new_post.md` |
 | Groq via litellm | CrewAI uses `groq/llama-3.3-70b-versatile` through litellm routing |
 
 ---
@@ -45,16 +46,12 @@ With **AI Planning enabled** (`planning=True`), CrewAI generates an execution pl
 ## Issues Fixed
 
 1. **Windows Emoji Encoding Error** (`charmap` codec):
-   - CrewAI's verbose output uses emoji characters (🚀📋) that Windows terminals can't display.
-   - **Fix**: Added `sys.stdout`/`sys.stderr` wrappers with `encoding='utf-8'` at the top of the script.
+   - CrewAI's verbose output uses emoji characters that Windows terminals can't display.
+   - **Fix**: Added UTF-8 stdout/stderr wrappers at the top of the script.
 
 2. **`cache_breakpoint` Groq Incompatibility**:
-   - CrewAI adds Anthropic-style `cache_breakpoint` fields to messages; Groq rejects them.
-   - **Fix**: Applied a monkey-patch on `litellm.completion` to strip those fields before every API call.
-
-3. **`WebsiteSearchTool` 429 Error**:
-   - The tool uses OpenAI embeddings internally; hitting quota limits causes a 429.
-   - **Impact**: Non-fatal — the writer agent uses its own knowledge as a fallback.
+   - CrewAI adds Anthropic-style fields that Groq rejects.
+   - **Fix**: Monkey-patch on `litellm.completion` strips those fields before every API call.
 
 ---
 
@@ -65,16 +62,15 @@ With **AI Planning enabled** (`planning=True`), CrewAI generates an execution pl
    pip install crewai crewai-tools litellm python-dotenv
    ```
 
-2. **Set API Key** in `1/3/4/.env`:
+2. **Set API Key** — Create `6/.env`:
    ```env
    GROQ_API_KEY=your-groq-api-key-here
    CREWAI_TRACING_ENABLED=false
    ```
-   > `CREWAI_TRACING_ENABLED=false` silences the `ConnectionResetError` telemetry warnings.
 
 3. **Run the crew**:
    ```powershell
-   $env:PYTHONUTF8=1; & .venv313\Scripts\python 1/3/4/5/6/TASK6.PY
+   $env:PYTHONUTF8=1; & .venv313\Scripts\python 6/TASK6.PY
    ```
 
 ---
@@ -82,13 +78,7 @@ With **AI Planning enabled** (`planning=True`), CrewAI generates an execution pl
 ## Running the Task
 
 ```powershell
-$env:PYTHONUTF8=1; & .venv313\Scripts\python 1/3/4/5/6/TASK6.PY
+$env:PYTHONUTF8=1; & .venv313\Scripts\python 6/TASK6.PY
 ```
 
-**What happens**:
-1. CrewAI plans the execution using the LLM
-2. The **Researcher** agent searches for the latest AI trends
-3. The **Writer** agent composes a 4-paragraph blog post
-4. Output is saved to `blog-posts/new_post.md` and printed to console
-
-**Sample generated blog post topics**: Explainable AI (XAI), Edge AI, Transfer Learning, AI-powered Cybersecurity.
+**Output**: A 4-paragraph blog post saved to `6/blog-posts/new_post.md` covering top AI trends such as Explainable AI, Edge AI, and Transfer Learning.

@@ -2,17 +2,17 @@
 
 This document covers Task 4, which builds a full ReAct agent using LangGraph with persistent in-memory conversation history and multiple tools.
 
-## Project Structure under Folder `1/3/4`
+## Project Structure
 
 ```
-1/3/4/
+4/
 ├── task4.py       # Main agent script — LangGraph ReAct agent
 ├── tools.py       # Custom tool definitions (calculator, weather, etc.)
-├── .env           # API keys (GROQ_API_KEY, TAVILY_API_KEY) — not committed
+├── .env           # API keys — not committed (create locally)
 └── walkthrough.md # This documentation
 ```
 
-> **Note:** All API keys are loaded from `.env`. Never commit `.env` files.
+> **Note:** All API keys are loaded from `4/.env`. Never commit `.env` files.
 
 ---
 
@@ -53,7 +53,7 @@ Builds a **conversational AI agent** using:
    pip install langchain-groq langgraph tavily-python python-dotenv requests
    ```
 
-2. **Set API Keys** in `1/3/4/.env`:
+2. **Set API Keys** — Create `4/.env`:
    ```env
    GROQ_API_KEY=your-groq-api-key-here
    TAVILY_API_KEY=your-tavily-api-key-here
@@ -61,7 +61,7 @@ Builds a **conversational AI agent** using:
 
 3. **Run the agent**:
    ```powershell
-   & .venv313\Scripts\python 1/3/4/task4.py
+   & .venv313\Scripts\python 4/task4.py
    ```
 
 ---
@@ -69,13 +69,7 @@ Builds a **conversational AI agent** using:
 ## Running the Task
 
 ```powershell
-& .venv313\Scripts\python 1/3/4/task4.py
+& .venv313\Scripts\python 4/task4.py
 ```
 
-Type any question at the `You :` prompt. The agent will:
-1. Decide whether a tool is needed
-2. Call the appropriate tool
-3. Use the result to form a response
-4. Remember context from previous messages in the session
-
-Type `exit` to quit.
+Type any question at the `You :` prompt. The agent will decide whether a tool is needed, call it, and remember context from previous messages. Type `exit` to quit.

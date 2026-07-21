@@ -12,8 +12,8 @@ from tavily import TavilyClient
 # pyrefly: ignore [missing-import]
 from langchain_core.tools import Tool
 
-# Load API key from .env file in parent folder (1/3/4/.env)
-load_dotenv(dotenv_path=Path(__file__).resolve().parent.parent / "4" / ".env")
+# Load API key from .env file in this folder (3/.env)
+load_dotenv(dotenv_path=Path(__file__).resolve().parent / ".env")
 
 tavily_api_key = os.getenv("TAVILY_API_KEY")
 if not tavily_api_key:

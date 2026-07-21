@@ -2,15 +2,16 @@
 
 This document covers Task 3, which introduces web search as an agent tool using the Tavily API wrapped with a LangChain `Tool`.
 
-## Project Structure under Folder `1/3`
+## Project Structure
 
 ```
-1/3/
+3/
 ├── task3.py       # Main script — Tavily web search tool demo
+├── .env           # API keys — not committed (create locally)
 └── walkthrough.md # This documentation
 ```
 
-> **Note:** The Tavily API key is loaded from `1/3/4/.env` (shared with Task 4). Never hardcode keys in source files.
+> **Note:** The Tavily API key is loaded from `3/.env`. Never hardcode keys in source files.
 
 ---
 
@@ -39,7 +40,7 @@ This document covers Task 3, which introduces web search as an agent tool using 
    pip install tavily-python langchain-core langchain-community python-dotenv
    ```
 
-2. **Set API Key** — Add to `1/3/4/.env`:
+2. **Set API Key** — Create `3/.env`:
    ```env
    TAVILY_API_KEY=your-tavily-api-key-here
    ```
@@ -47,7 +48,7 @@ This document covers Task 3, which introduces web search as an agent tool using 
 
 3. **Run the script**:
    ```powershell
-   & .venv313\Scripts\python 1/3/task3.py
+   & .venv313\Scripts\python 3/task3.py
    ```
 
 ---
@@ -55,7 +56,7 @@ This document covers Task 3, which introduces web search as an agent tool using 
 ## Running the Task
 
 ```powershell
-& .venv313\Scripts\python 1/3/task3.py
+& .venv313\Scripts\python 3/task3.py
 ```
 
 **Expected output**: A list of up to 3 structured web search results about Virat Kohli, including titles, URLs, and content snippets.
