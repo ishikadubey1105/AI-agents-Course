@@ -23,6 +23,8 @@ llm = ChatGroq(
 )
 
 
+
+
 # 2. Tools (Tavily search)
 tavily_client = TavilyClient(
     api_key="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"
